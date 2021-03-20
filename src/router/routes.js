@@ -12,4 +12,6 @@ export default [
     name: 'Home',
     component: Home
   },
+  // otherwise redirect to home
+  { path: '*', redirect: '/' }
 ]

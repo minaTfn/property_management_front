@@ -1,54 +1,72 @@
 <template>
-    <v-form>
-        <v-container>
-            <v-row>
-                <v-col cols="12">
+    <div class="d-flex justify-center align-center fill-height">
+        <v-card min-width="500" rounded class="px-5 pb-5" shaped elevation="5" :loading="loading">
+            <form @keydown="form.errors.clear($event.target.name)">
+                <v-card-title class="text-h1 py-6">
+                    Log in
+                </v-card-title>
+                <v-card-text>
                     <v-text-field
                             v-model="form.email"
                             label="Email"
+                            name="email"
+                            :error-messages="form.errors.get('email')"
                             required
                     ></v-text-field>
-                </v-col>
-
-                <v-col cols="12">
                     <v-text-field
                             v-model="form.password"
                             label="Password"
+                            name="password"
+                            type="password"
+                            :error-messages="form.errors.get('password')"
                             required
                     ></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                    <v-btn @click="loginUser">
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn @click="loginUser" large class="primary">
                         Login
                     </v-btn>
-                </v-col>
-            </v-row>
-        </v-container>
-    </v-form>
+                </v-card-actions>
+            </form>
+        </v-card>
+    </div>
 </template>
 
 <script>
-    import {mapActions} from 'vuex';
+    import {mapActions, mapMutations} from 'vuex';
+    import Form from "@/helpers/classes/Form";
+    import _ from 'lodash';
+
 
     export default {
         name: "Login",
         data: () => ({
-            form: {
-                email: '',
-                password: '',
-            }
+            form: new Form(),
+            loading: false
         }),
 
-        methods: {
+        watch:{
+            form: {
+                handler: _.debounce(function (form) {
+                    this.updateForm(form);
+                }, 500), deep: true
+            }
+        },
+        mounted(){
+            this.form = _.cloneDeep(this.$store.state.accounts.form)
+        },
 
+        methods: {
+            ...mapMutations('accounts',['resetForm', 'updateForm']),
             ...mapActions('accounts', ['login']),
             loginUser() {
-                this.login(this.form);
+                this.loading = true;
+                this.login(this.form)
+                    .then(() => {
+                        this.loading = false;
+                        this.resetForm();
+                    })
             },
         }
     }
 </script>
-
-<style scoped>
-
-</style>

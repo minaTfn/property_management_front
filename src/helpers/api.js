@@ -9,8 +9,6 @@ const request = axios.create({
 
 const token = localStorage.getItem('token');
 
-request.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 if (token) {
     request.defaults.headers.common.Authorization = `Bearer ${token}`;
 } else {
@@ -20,7 +18,7 @@ if (token) {
 
 export default {
     auth: {
-        login: (credentials) => request.post('/accounts/token/', credentials).then(res=>console.log(res)),
+        login: (credentials) => request.post('/accounts/token/', credentials).then(response => response.data),
         register: (params) => request.post('/accounts/register/', params).then(response => response.data),
     }
 }
