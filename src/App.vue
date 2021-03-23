@@ -12,6 +12,9 @@
 
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <router-link to="/home" >home </router-link>
+      <router-link to="/user-info" >user info</router-link>
+      <router-link to="/register" >register</router-link>
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
 

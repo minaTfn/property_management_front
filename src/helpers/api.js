@@ -8,7 +8,7 @@ const request = axios.create({
 });
 
 const token = localStorage.getItem('token');
-
+console.log(token)
 if (token) {
     request.defaults.headers.common.Authorization = `Bearer ${token}`;
 } else {
