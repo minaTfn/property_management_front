@@ -45,16 +45,6 @@ class Errors {
      */
     record(errors) {
 
-        // Yii2 version
-        // let newError = {}
-        // eslint-disable-next-line no-unused-vars
-        // for (const [key, value] of Object.entries(errors)) {
-        //     newError[value.field] = value.message
-        // }
-
-        // this.errors = newError;
-
-        // laravel version
         this.errors = errors;
     }
 
