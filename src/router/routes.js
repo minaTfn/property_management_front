@@ -1,7 +1,7 @@
-import Home from '../views/Home.vue'
 import Login from '../views/accounts/Login.vue'
 import Register from "../views/accounts/Register";
 import UserInfo from "../views/accounts/UserInfo";
+import Properties from "../views/Properties.vue";
 
 export default [
     {
@@ -20,10 +20,11 @@ export default [
         component: Login
     },
     {
-        path: '/home',
-        name: 'Home',
-        component: Home
+        path: '/properties',
+        name: 'Properties',
+        component: Properties
     },
+
     // otherwise redirect to home
-    {path: '*', redirect: '/home'}
+    {path: '*', redirect: '/login'}
 ]

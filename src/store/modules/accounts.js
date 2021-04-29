@@ -1,6 +1,4 @@
 import api from "../../helpers/api";
-// import VueJwtDecode from 'vue-jwt-decode'
-// import _ from "lodash"
 import Form from "@/helpers/classes/Form";
 
 const state = () => ({
