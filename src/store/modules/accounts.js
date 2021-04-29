@@ -34,9 +34,8 @@ const actions = {
     login({commit, dispatch}, credentials) {
         api.accounts.login(credentials).then((res) => {
             localStorage.setItem('token', res.access)
+        }).then(()=>{
             dispatch("getUserInfo");
-            // const data = getUserData(res.access)
-            // commit('setLoggedUser', data);
         }).catch(error => {
             commit('setFormErrors', {form: 'loginForm', errors: error.response.data})
         });
